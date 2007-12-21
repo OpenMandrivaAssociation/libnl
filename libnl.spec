@@ -20,6 +20,7 @@ Group:		System/X11
 URL:		http://people.suug.ch/~tgr/libnl/
 Source0:	http://people.suug.ch/~tgr/libnl/files/libnl-%{fullversion}.tar.bz2
 Patch0:     libnl-dont-install-as-root.patch
+BuildRoot:	%{_tmppath}/%{name}-buildroot
 
 %description
 libnl is a library for applications dealing with netlink sockets.
