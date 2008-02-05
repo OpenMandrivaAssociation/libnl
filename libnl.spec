@@ -1,106 +1,76 @@
-%define	name libnl
-%define version  1.0
-%define pre pre5
-%if %{pre}
-%define release  %mkrel 0.%{pre}.3
-%define fullversion %{version}-%{pre}
-%else
-%define release  %mkrel 1
-%define fullversion %{version}
-%endif
-%define major 1
-%define libname %mklibname nl %major
+%define	major	1
+%define	libname %mklibname nl %{major}
+%define	libdev	%mklibname -d nl
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		libnl
+Version:	1.1
+Release:	%mkrel 1
 Summary:	Library for applications dealing with netlink sockets
 License:	GPL
 Group:		System/X11
 URL:		http://people.suug.ch/~tgr/libnl/
-Source0:	http://people.suug.ch/~tgr/libnl/files/libnl-%{fullversion}.tar.bz2
-Patch0:     libnl-dont-install-as-root.patch
-BuildRoot:	%{_tmppath}/%{name}-buildroot
+Source0:	http://people.suug.ch/~tgr/libnl/files/%{name}-%{version}.tar.lzma
 
 %description
 libnl is a library for applications dealing with netlink sockets.
 The library provides an interface for raw netlink messaging and 
 various netlink family specific interfaces.
 
-#--------------------------------------------------------------------
-
-%package -n %libname
+%package -n	%{libname}
 Group:		System/Libraries
 Summary:	Library for applications dealing with netlink sockets
-Provides:	%name = %version-%release
 
-%description -n %libname
+%description -n	%{libname}
 libnl is a library for applications dealing with netlink sockets.
 The library provides an interface for raw netlink messaging and
 various netlink family specific interfaces.
 
-%post -n %libname -p /sbin/ldconfig
-%postun -n %libname -p /sbin/ldconfig
+%package -n	%{libdev}
+Group:		Development/C
+Summary:	Header files of libnl
+Provides:	%{name}-devel = %{version}-%{release}
+Requires:	%{libname} = %{version}
 
-%files -n %libname
-%defattr(-,root,root)
-%{_libdir}/libnl.so.1
-%{_libdir}/libnl.so.1.0-pre5
-
-
-#--------------------------------------------------------------------
-%package -n %libname-devel
-Group:    Development/C
-Summary:  Header files of libnl
-Requires: %name = %version
-Provides: %name-devel = %version-%release
-
-%description -n %libname-devel
+%description -n	%{libdev}
 libnl is a library for applications dealing with netlink sockets.
 The library provides an interface for raw netlink messaging and
 various netlink family specific interfaces.
-
-%files -n %libname-devel
-%defattr(-,root,root)
-%{_includedir}/netlink/*.h
-%{_includedir}/netlink/route/*.h
-%{_includedir}/netlink/route/cls/*.h
-%{_includedir}/netlink/route/sch/*.h
-%{_libdir}/libnl.so
-%{_libdir}/pkgconfig/%{name}-%{major}.pc
-#---------------------------------------------------------------------
 
 %prep
-
-%setup -q -n %{name}-%{fullversion}
-%patch -p0 -b .install-root
+%setup -q
 
 %build
-
 %configure2_5x
 %make
 
 %install
-rm -rf %buildroot
+rm -rf %{buildroot}
+%makeinstall_std
 
-%{makeinstall_std} LIBDIR=%_libdir
-
-install -d %{buildroot}%{_libdir}/pkgconfig/
-cat << EOF > %{buildroot}%{_libdir}/pkgconfig/%{name}-%{major}.pc
-prefix=%{_prefix}
-exec_prefix=\${prefix}
-libdir=%{_libdir}
-includedir=%{_includedir}
-
-Name: libnl
-Description: Convenience library for netlink sockets
-Version: %{fullversion}
-Libs: -L\${libdir} -lnl
-Cflags:
-EOF
+%post -n %{libname} -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
 
 %clean
-rm -rf %buildroot
+rm -rf %{buildroot}
 
+%files -n %{libname}
+%defattr(-,root,root)
+%{_libdir}/libnl.so.%{major}
+%{_libdir}/libnl.so.%{major}.*
 
-
+%files -n %{libdev}
+%defattr(-,root,root)
+%dir %{_includedir}/netlink
+%{_includedir}/netlink/*.h
+%dir %{_includedir}/netlink/fib_lookup
+%{_includedir}/netlink/fib_lookup/*.h
+%dir %{_includedir}/netlink/genl
+%{_includedir}/netlink/genl/*.h
+%dir %{_includedir}/netlink/route
+%{_includedir}/netlink/route/*.h
+%dir %{_includedir}/netlink/route/cls
+%{_includedir}/netlink/route/cls/*.h
+%dir %{_includedir}/netlink/route/sch
+%{_includedir}/netlink/route/sch/*.h
+%{_libdir}/libnl.so
+%{_libdir}/pkgconfig/%{name}-%{major}.pc
