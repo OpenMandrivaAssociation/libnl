@@ -8,6 +8,7 @@ Release:	%mkrel 1
 Summary:	Library for applications dealing with netlink sockets
 License:	GPL
 Group:		System/X11
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://people.suug.ch/~tgr/libnl/
 Source0:	http://people.suug.ch/~tgr/libnl/files/%{name}-%{version}.tar.lzma
 
