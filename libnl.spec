@@ -4,7 +4,7 @@
 
 Name:		libnl
 Version:	1.1
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	Library for applications dealing with netlink sockets
 License:	GPL
 Group:		System/X11
@@ -31,6 +31,7 @@ Group:		Development/C
 Summary:	Header files of libnl
 Provides:	%{name}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}
+Obsoletes:	%mklibname nl 1 -d
 
 %description -n	%{libdev}
 libnl is a library for applications dealing with netlink sockets.
