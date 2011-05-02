@@ -4,7 +4,7 @@
 
 Name:		libnl
 Version:	1.1
-Release:	%mkrel 6
+Release:	%mkrel 7
 Summary:	Library for applications dealing with netlink sockets
 License:	GPL
 Group:		System/X11
