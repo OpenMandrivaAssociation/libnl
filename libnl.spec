@@ -4,14 +4,14 @@
 
 Name:		libnl
 Version:	1.1
-Release:	%mkrel 7
+Release:	8
 Summary:	Library for applications dealing with netlink sockets
 License:	GPL
 Group:		System/X11
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://people.suug.ch/~tgr/libnl/
 Source0:	http://people.suug.ch/~tgr/libnl/files/%{name}-%{version}.tar.lzma
 BuildRequires: doxygen
+
 Patch1: libnl-1.0-pre5-static.patch
 Patch2: libnl-1.0-pre5-debuginfo.patch
 Patch3: libnl-1.0-pre8-use-vasprintf-retval.patch
@@ -47,13 +47,7 @@ various netlink family specific interfaces.
 
 %prep
 %setup -q
-%setup -q -n %{name}-%{version}
-%patch1 -p1 -b .build-static
-%patch2 -p1 -b .debuginfo
-%patch3 -p1 -b .use-vasprintf-retval
-%patch4 -p1 -b .more-build-output
-%patch5 -p1 -b .limits
-%patch6 -p1 -b .doc-inlinesrc
+%apply_patches
 
 # a quick hack to make doxygen stripping builddir from html outputs.
 sed -i.org -e "s,^STRIP_FROM_PATH.*,STRIP_FROM_PATH = `pwd`," doc/Doxyfile.in
@@ -64,26 +58,12 @@ make
 make gendoc
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
-
 %files -n %{libname}
-%defattr(-,root,root)
-%{_libdir}/libnl.so.%{major}
-%{_libdir}/libnl.so.%{major}.*
+%{_libdir}/libnl.so.%{major}*
 
 %files -n %{libdev}
-%defattr(-,root,root)
 %dir %{_includedir}/netlink
 %{_includedir}/netlink/*.h
 %dir %{_includedir}/netlink/fib_lookup
@@ -99,3 +79,4 @@ rm -rf %{buildroot}
 %{_libdir}/libnl.so
 %{_libdir}/pkgconfig/%{name}-%{major}.pc
 %{_libdir}/%{name}.a
+
