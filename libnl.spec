@@ -5,7 +5,7 @@
 Summary:	Library for applications dealing with netlink sockets
 Name:		libnl
 Version:	1.1
-Release:	13
+Release:	14
 License:	GPLv2
 Group:		System/X11
 Url:		http://people.suug.ch/~tgr/libnl/
