@@ -54,9 +54,8 @@ find . -perm 0640 -exec chmod 0644 '{}' \;
 sed -i.org -e "s,^STRIP_FROM_PATH.*,STRIP_FROM_PATH = `pwd`," doc/Doxyfile.in
 
 %build
-%configure2_5x --disable-static
-make
-make gendoc
+%configure --disable-static
+%make
 
 %install
 %makeinstall_std
@@ -80,4 +79,3 @@ rm -f %{buildroot}%{_libdir}/*.a
 %{_includedir}/netlink/route/sch/*.h
 %{_libdir}/libnl.so
 %{_libdir}/pkgconfig/%{name}-%{major}.pc
-
