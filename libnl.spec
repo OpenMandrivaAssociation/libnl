@@ -1,6 +1,7 @@
 %define	major	1
 %define	libname	%mklibname nl %{major}
 %define	devname	%mklibname -d nl
+%define _disable_lto 1
 
 Summary:	Library for applications dealing with netlink sockets
 Name:		libnl
