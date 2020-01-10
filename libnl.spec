@@ -46,7 +46,7 @@ various netlink family specific interfaces.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 # Fix unreadable files
 find . -perm 0640 -exec chmod 0644 '{}' \;
