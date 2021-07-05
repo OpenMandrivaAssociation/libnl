@@ -5,12 +5,12 @@
 
 Summary:	Library for applications dealing with netlink sockets
 Name:		libnl
-Version:	1.1
-Release:	18
+Version:	1.1.4
+Release:	1
 License:	GPLv2
 Group:		System/X11
 Url:		http://people.suug.ch/~tgr/libnl/
-Source0:	http://people.suug.ch/~tgr/libnl/files/%{name}-%{version}.tar.lzma
+Source0:	https://www.infradead.org/~tgr/libnl/files/libnl-%{version}.tar.gz
 Patch1: libnl-1.0-pre5-static.patch
 Patch2: libnl-1.0-pre5-debuginfo.patch
 Patch3: libnl-1.0-pre8-use-vasprintf-retval.patch
