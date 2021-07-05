@@ -12,7 +12,7 @@ Group:		System/X11
 Url:		http://people.suug.ch/~tgr/libnl/
 Source0:	https://www.infradead.org/~tgr/libnl/files/libnl-%{version}.tar.gz
 #Patch1: libnl-1.0-pre5-static.patch
-Patch2: libnl-1.0-pre5-debuginfo.patch
+#Patch2: libnl-1.0-pre5-debuginfo.patch
 Patch3: libnl-1.0-pre8-use-vasprintf-retval.patch
 Patch4: libnl-1.0-pre8-more-build-output.patch
 Patch5: libnl-1.1-include-limits-h.patch
