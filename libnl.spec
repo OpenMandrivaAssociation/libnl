@@ -9,7 +9,7 @@ Version:	1.1.4
 Release:	2
 License:	GPLv2
 Group:		System/X11
-Url:		http://people.suug.ch/~tgr/libnl/
+Url:		https://people.suug.ch/~tgr/libnl/
 Source0:	https://www.infradead.org/~tgr/libnl/files/libnl-%{version}.tar.gz
 BuildRequires: doxygen
 
