@@ -11,6 +11,11 @@ License:	GPLv2
 Group:		System/X11
 Url:		https://people.suug.ch/~tgr/libnl/
 Source0:	https://www.infradead.org/~tgr/libnl/files/libnl-%{version}.tar.gz
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires: doxygen
 
 %description
